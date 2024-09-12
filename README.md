@@ -1,4 +1,4 @@
-# Homelab
+# urban-disco (my homelab)
 
 This repository contains the configuration for my homelab. I'm using [Nomad](https://nomadproject.io) and [Consul](https://www.consul.io/) for orchestration and service discovery. [Packer](https://packer.io) is slinging virtual images while [Terraform](https://www.terraform.io) is helping to manage state. 
 
