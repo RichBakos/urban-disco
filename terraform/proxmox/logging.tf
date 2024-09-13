@@ -1,5 +1,7 @@
 resource "proxmox_vm_qemu" "graylog" {
 
+  depends_on = [ resource.proxmox_vm_qemu.cluster-services ]
+
   name        = "graylog01"
   target_node = var.proxmox_nodes[0]
   clone       = "cluster-services"
@@ -57,6 +59,8 @@ resource "proxmox_vm_qemu" "graylog" {
 
 resource "proxmox_vm_qemu" "mongo" {
 
+  depends_on = [ resource.proxmox_vm_qemu.cluster-services ]
+
   name        = "mongo01"
   target_node = var.proxmox_nodes[1]
   clone       = "cluster-services"
@@ -113,6 +117,8 @@ resource "proxmox_vm_qemu" "mongo" {
 }
 
 resource "proxmox_vm_qemu" "opensearch" {
+
+  depends_on = [ resource.proxmox_vm_qemu.cluster-services ]
 
   name        = "opensearch01"
   target_node = var.proxmox_nodes[2]

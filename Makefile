@@ -21,7 +21,6 @@ plan:##........Create an execution plan for terraform
 apply:##........Execute a terraform plan
 	cd terraform && terraform apply --auto-approve
 
-
 .PHONY: format
 format:##........Format both terraform and nomd job files
 	cd terraform && terraform fmt -recursive -check
@@ -33,6 +32,4 @@ validate-jobs:##........Validate all nomad jobs for correctness
 
 .PHONY: build-%
 build-%:##........Build and image with packer
-	cd packer/$* && packer build .
-
-
+	cd packer/$* && packer build -var-file=../packer.pkrvars.hcl .

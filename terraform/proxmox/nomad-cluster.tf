@@ -1,6 +1,10 @@
 resource "proxmox_vm_qemu" "nomad-server" {
   
-  depends_on = [ resource.proxmox_vm_qemu.opensearch ]
+  depends_on = [ 
+    resource.proxmox_vm_qemu.graylog,
+    resource.proxmox_vm_qemu.mongo,
+    resource.proxmox_vm_qemu.opensearch 
+  ]
 
   count       = 3
   name        = var.server_hostname[count.index]
