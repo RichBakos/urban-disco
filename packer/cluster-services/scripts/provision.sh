@@ -2,8 +2,8 @@
 
 set -o errexit
 
-# Install gluster client, nfs, docker, consul and cloud-init
-sudo apt-get update && apt-get install -y glusterfs-client nfs-kernel-server docker-ce consul cloud-init
+# Install gluster client, docker, consul and cloud-init
+sudo apt-get update && apt-get install -y glusterfs-client docker-ce consul cloud-init
 
 # Add gluster mount in fstab
 sudo echo "172.16.20.202:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=172.16.20.203 0 0" >> /etc/fstab

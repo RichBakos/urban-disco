@@ -5,7 +5,7 @@ source "proxmox-iso" "nomad-client" {
   insecure_skip_tls_verify = true
   node                     = var.proxmox_node
   
-  vm_id                   = 9001
+  vm_id                   = 9002
   vm_name                 = "nomad-client"
   template_description    = "Nomad client (Debian 12) built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 

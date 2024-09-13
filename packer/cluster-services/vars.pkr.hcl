@@ -17,12 +17,12 @@ variable "proxmox_api_password" {
 
 variable "proxmox_node" {
   type        = string
-  description = "The proxmox node being deployed to"
+  description = "The proxmox node being deployed to" 
 }
 
 variable "iso_file" {
   type        = string
-  description = "The iso file being used to create this image from"
+  description = "The iso file being used to create this image from" 
 }
 
 variable "storage_pool" {
@@ -32,7 +32,7 @@ variable "storage_pool" {
 
 variable "bridge" {
   type        = string
-  description = "The network bridge assigned to the vm guest"
+  description = "The network bridge assigned to the vm guest" 
 }
 
 variable "vlan_tag" {
@@ -49,6 +49,5 @@ variable "ssh_username" {
 variable "ssh_password" {
   type        = string
   sensitive   = true
-  description = "The password of the provisioning user" 
+  description = "The password of the provisioning user"
 }
-

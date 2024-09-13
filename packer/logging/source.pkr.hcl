@@ -1,13 +1,14 @@
-source "proxmox-iso" "nomad-server" {
+source "proxmox-iso" "logging" {
+
   proxmox_url              = var.proxmox_url
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
-  insecure_skip_tls_verify = true
   node                     = var.proxmox_node
-  
-  vm_id                   = 9003
-  vm_name                 = "nomad-server"
-  template_description    = "Nomad server (Debian 12) built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
+  insecure_skip_tls_verify = true  
+
+  vm_id                   = 9001
+  vm_name                 = "logging"
+  template_description    = "Logging services (Graylog, mongo and opensearch on Debian 12) built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
   cpu_type                = "host"
