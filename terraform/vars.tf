@@ -1,13 +1,3 @@
-variable "nomad_url" {
-  type        = string
-  description = "The url to the nomad instance"
-}
-
-variable "consul_url" {
-  type        = string
-  description = "The url to the consul instance"
-}
-
 ###--- Proxmox vars ---###
 variable "proxmox_api_url" {
   type        = string

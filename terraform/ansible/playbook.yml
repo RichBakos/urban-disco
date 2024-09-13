@@ -1,0 +1,14 @@
+- name: Copy nomad volumes to client machnies
+  hosts: nomad_clients
+  become: yes
+  
+  tasks:
+  - name: Copy volumes.hcl to nomad clients
+    copy:
+      src: /home/rab/urban-disco/terraform/nomad/volumes/volumes.hcl
+      dest: /etc/nomad.d/volumes.hcl
+
+  - name: Restart nomad
+    service:
+      name: nomad
+      state: restarted

@@ -21,9 +21,14 @@ module "proxmox" {
   bridge               = var.bridge
 }
 
+module "ansible" {
+  source     = "./ansible"
+  depends_on = [ module.proxmox ]
+}
+
 module "consul" {
   source     = "./consul"
-  depends_on = [ module.proxmox ]
+  depends_on = [ module.ansible ]
 }
 
 module "nomad" {

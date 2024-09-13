@@ -3,5 +3,5 @@ provider "nomad" {
 }
 
 provider "consul" {
-  address = var.consul_url
+  address = "http://server01.bakos.lan:8500"
 }
