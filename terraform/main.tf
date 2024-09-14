@@ -21,18 +21,15 @@ module "proxmox" {
   bridge               = var.bridge
 }
 
-module "ansible" {
-  source     = "./ansible"
+module "consul" {
+  source     = "./consul"
   depends_on = [ module.proxmox ]
 }
 
-module "consul" {
-  source     = "./consul"
-  depends_on = [ module.ansible ]
-}
-
 module "nomad" {
-  source = "./nomad"
+  source     = "./nomad"
+  depends_on = [ module.consul ]
+  
   # Traefik forward auth
   auth_domain          = var.auth_domain
   auth_client_id       = var.auth_client_id
@@ -60,7 +57,5 @@ module "nomad" {
   samba_uid      = var.samba_uid
   samba_password = var.samba_password
   samba_share    = var.samba_share
-
-  depends_on     = [ module.proxmox, module.consul ]
 }
 
