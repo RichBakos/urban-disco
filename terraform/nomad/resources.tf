@@ -14,6 +14,10 @@ resource "nomad_job" "drawio" {
   jobspec = file("${path.module}/jobs/drawio.hcl")
 }
 
+resource "nomad_job" "emulatorjs" {
+  jobspec = file("${path.module}/jobs/emulatorjs.hcl")
+}
+
 resource "nomad_job" "flaresolverr" {
   jobspec = file("${path.module}/jobs/flaresolverr.hcl")
 }
@@ -31,6 +35,10 @@ resource "nomad_job" "influxdb" {
 }
 
 resource "nomad_job" "jellyfin" {
+  jobspec = file("${path.module}/jobs/jellyfin.hcl")
+}
+
+resource "nomad_job" "journalctl-cleanup" {
   jobspec = file("${path.module}/jobs/jellyfin.hcl")
 }
 
@@ -72,15 +80,6 @@ resource "nomad_job" "samba" {
 
 resource "nomad_job" "sonarr" {
   jobspec = file("${path.module}/jobs/sonarr.hcl")
-}
-
-resource "nomad_job" "storage-controller" {
-  jobspec = file("${path.module}/jobs/storage-controller.hcl")
-}
-
-resource "nomad_job" "storage-nodes" {
-  jobspec = file("${path.module}/jobs/storage-nodes.hcl")
-  depends_on = [ nomad_job.storage-controller ]
 }
 
 resource "nomad_job" "telegraf" {

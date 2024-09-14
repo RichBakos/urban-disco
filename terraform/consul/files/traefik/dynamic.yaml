@@ -1,7 +1,7 @@
 tls:
-  certificates:
-    - certFile: "/etc/traefik/certs/bakos.me.crt"
-      keyFile: "/etc/traefik/certs/bakos.me.key"
+  # certificates:
+  #   - certFile: "/etc/traefik/certs/bakos.me.crt"
+  #     keyFile: "/etc/traefik/certs/bakos.me.key"
   stores:
     default:
       defaultCertificate:
@@ -63,15 +63,11 @@ http:
       loadbalancer:
         servers:
           - url: http://server01.bakos.lan:4646
-          - url: http://server02.bakos.lan:4646
-          - url: http://server03.bakos.lan:4646
 
     consul:
       loadbalancer:
         servers:
           - url: http://server01.bakos.lan:8500
-          - url: http://server02.bakos.lan:8500
-          - url: http://server03.bakos.lan:8500
 
     pfsense:
       loadbalancer:
@@ -82,8 +78,6 @@ http:
       loadbalancer:
         servers:
           - url: https://172.16.20.201:8006
-          - url: https://172.16.20.202:8006
-          - url: https://172.16.20.203:8006
 
     pve-backup:
       loadbalancer:

@@ -1,8 +1,8 @@
-variable "proxmox_url" {
+variable "proxmox_api_url" {
   type        = string
   sensitive   = true
   description = "The url of proxmox"
-  default     = env("proxmox_url")
+  default     = env("proxmox_api_url")
 }
 
 variable "proxmox_api_user" {

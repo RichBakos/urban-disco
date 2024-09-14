@@ -1,5 +1,15 @@
 client {
 
+  host_volume "arcade_config" {
+    path      = "/mnt/volumes/arcade/config"
+    read_only = false
+  }
+
+  host_volume "arcade_data" {
+    path      = "/mnt/volumes/arcade/data"
+    read_only = false
+  }
+
   host_volume "bitwarden" {
     path      = "/mnt/volumes/bitwarden"
     read_only = false

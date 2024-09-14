@@ -17,9 +17,17 @@ init-upgrade:## upgrade terraform with the latest providers
 plan:##........Create an execution plan for terraform
 	cd terraform && terraform plan
 
+.PHONY: plan-%
+plan-%:##........Create an execution plan for terraform
+	cd terraform && terraform plan -target=module.$*
+
 .PHONY: apply
 apply:##........Execute a terraform plan
 	cd terraform && terraform apply --auto-approve
+
+.PHONY: apply-%
+apply-%:##........Execute a terraform plan
+	cd terraform && terraform apply -target=module.$* --auto-approve	
 
 .PHONY: format
 format:##........Format both terraform and nomd job files
