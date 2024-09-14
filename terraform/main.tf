@@ -32,7 +32,9 @@ module "consul" {
 }
 
 module "nomad" {
-  source = "./nomad"
+  source         = "./nomad"
+  depends_on     = [ module.proxmox 
+  ]  
   # Traefik forward auth
   auth_domain          = var.auth_domain
   auth_client_id       = var.auth_client_id
@@ -51,16 +53,14 @@ module "nomad" {
   mongo_password             = var.mongo_password
   mongo_initdb_root_username = var.mongo_initdb_root_username
   mongo_initdb_root_password = var.mongo_initdb_root_password
-  # Plex
-  plex_auth_token = var.plex_auth_token
   # Postgres
   postgres_root_user     = var.postgres_root_user
   postgres_root_password = var.postgres_root_password
+  # Plex
+  plex_auth_token = var.plex_auth_token
   # Samba
   samba_uid      = var.samba_uid
   samba_password = var.samba_password
   samba_share    = var.samba_share
-
-  depends_on     = [ module.proxmox, module.consul ]
 }
 
