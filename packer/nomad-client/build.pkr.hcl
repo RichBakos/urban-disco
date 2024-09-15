@@ -1,6 +1,12 @@
 build {
   sources = ["source.proxmox-iso.nomad-client"]
 
+  # Copy volumesup to tmp
+  provisioner "file" {
+    destination = "/tmp"
+    source      = "~/urban-disco/storage/volumes.hcl"
+  }
+
   # Copy shared config files up to tmp
   provisioner "file" {
     destination = "/tmp"

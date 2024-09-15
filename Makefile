@@ -23,7 +23,7 @@ plan-%:##........Create an execution plan for terraform
 
 .PHONY: apply
 apply:##........Execute a terraform plan
-	cd terraform && terraform apply --auto-approve
+	cd terraform && terraform apply --parallelism=1 --auto-approve
 
 .PHONY: apply-%
 apply-%:##........Execute a terraform plan

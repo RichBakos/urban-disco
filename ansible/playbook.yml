@@ -5,7 +5,7 @@
   tasks:
   - name: Copy volumes.hcl to nomad clients
     copy:
-      src: ~/urban-disco/terraform/nomad/volumes/volumes.hcl
+      src: ~/urban-disco/storage/volumes.hcl
       dest: /etc/nomad.d/volumes.hcl
 
   - name: Restart nomad
