@@ -4,7 +4,7 @@ build {
   # Copy volumesup to tmp
   provisioner "file" {
     destination = "/tmp"
-    source      = "~/urban-disco/storage/volumes.hcl"
+    source      = "../../storage/volumes.hcl"
   }
 
   # Copy shared config files up to tmp
