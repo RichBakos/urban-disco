@@ -1,11 +1,7 @@
 job "postgres" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client03"
-  }
-  
   group "postgres" {
 
     network {
@@ -31,7 +27,7 @@ job "postgres" {
         type     = "tcp"
         port     = "postgres"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "2s"
       }
     }
 

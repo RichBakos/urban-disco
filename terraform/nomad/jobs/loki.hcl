@@ -1,5 +1,14 @@
 job "loki" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
+
+  reschedule {
+    attempts       = 5
+    interval       = "1h"
+    unlimited      = false
+    delay          = "5s"
+    delay_function = "constant"
+  }
 
   group "loki" {
 
@@ -20,7 +29,7 @@ job "loki" {
         port     = "http"
         type     = "tcp"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "2s"
       }
     }
 
@@ -45,9 +54,9 @@ job "loki" {
 
       template {
         destination = "local/loki/local-config.yaml"
-        data        = <<EOF
-{{- key "homelab/loki/loki.yaml"}}
-EOF
+        data        = <<-EOF
+        {{- key "homelab/loki/loki.yaml"}}
+        EOF
       }
 
       resources {

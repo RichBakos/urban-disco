@@ -1,9 +1,18 @@
-resource "nomad_job" "auth" {
-  jobspec = file("${path.module}/jobs/auth.hcl")
+###--- Change to spread for + distribution ---###
+resource "nomad_scheduler_config" "config" {
+  scheduler_algorithm             = "spread"
+  memory_oversubscription_enabled = true
+  preemption_config = {
+    system_scheduler_enabled   = true
+    batch_scheduler_enabled    = true
+    service_scheduler_enabled  = true
+    sysbatch_scheduler_enabled = true
+  }
 }
 
-resource "nomad_job" "cannery" {
-  jobspec = file("${path.module}/jobs/cannery.hcl")
+###--- Nomad jobs ---###
+resource "nomad_job" "auth" {
+  jobspec = file("${path.module}/jobs/auth.hcl")
 }
 
 resource "nomad_job" "docker-cleanup" {
@@ -39,7 +48,7 @@ resource "nomad_job" "jellyfin" {
 }
 
 resource "nomad_job" "journalctl-cleanup" {
-  jobspec = file("${path.module}/jobs/jellyfin.hcl")
+  jobspec = file("${path.module}/jobs/journalctl-cleanup.hcl")
 }
 
 resource "nomad_job" "loki" {
@@ -64,6 +73,10 @@ resource "nomad_job" "plex" {
 
 resource "nomad_job" "postgres" {
   jobspec = file("${path.module}/jobs/postgres.hcl")
+}
+
+resource "nomad_job" "prowlarr" {
+  jobspec = file("${path.module}/jobs/prowlarr.hcl")
 }
 
 resource "nomad_job" "radarr" {
@@ -95,8 +108,8 @@ resource "nomad_job" "transmission" {
 }
 
 resource "nomad_job" "unifi" {
-  jobspec = file("${path.module}/jobs/unifi.hcl")
-  depends_on = [ nomad_job.mongo ]
+  jobspec    = file("${path.module}/jobs/unifi.hcl")
+  depends_on = [nomad_job.mongo]
 }
 
 resource "nomad_job" "vaultwarden" {

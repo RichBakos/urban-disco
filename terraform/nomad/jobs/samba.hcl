@@ -1,5 +1,6 @@
 job "samba" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "samba" {
 
@@ -17,8 +18,8 @@ job "samba" {
       port = "smb"
       check {
         type     = "tcp"
-        interval = "60s"
-        timeout  = "20s"
+        interval = "10s"
+        timeout  = "2s"
       }
     }
 

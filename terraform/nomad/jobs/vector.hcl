@@ -20,15 +20,15 @@ job "vector" {
       check {
         type     = "tcp"
         port     = "api"
-        interval = "20s"
-        timeout  = "5s"
+        interval = "10s"
+        timeout  = "2s"
       }
     }
 
     task "vector" {
       driver = "docker"
       config {
-        image        = "timberio/vector:0.28.X-alpine"
+        image        = "timberio/vector:0.41.X-debian"
         network_mode = "host"
         ports        = ["api"]
       }
@@ -50,9 +50,9 @@ job "vector" {
         destination   = "local/vector.toml"
         change_mode   = "signal"
         change_signal = "SIGHUP"
-        data          = <<EOF
-{{- key "homelab/vector/vector.toml"}}
-EOF
+        data          = <<-EOF
+        {{- key "homelab/vector/vector.toml"}}
+        EOF
       }
       resources {
         cpu    = 500

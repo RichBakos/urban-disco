@@ -1,5 +1,6 @@
 job "unifi" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   constraint {
     attribute = "${attr.unique.hostname}"
@@ -30,7 +31,7 @@ job "unifi" {
         type     = "tcp"
         port     = "http"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "2s"
       }
     }
 
@@ -43,7 +44,7 @@ job "unifi" {
         ports        = ["http"]
         volumes = [
           "/mnt/volumes/unifi/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro",
-        ]        
+        ]
       }
 
       volume_mount {

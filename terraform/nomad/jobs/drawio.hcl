@@ -1,5 +1,6 @@
 job "drawio" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "drawio" {
     network {
@@ -14,6 +15,7 @@ job "drawio" {
         "traefik.http.routers.drawio.entrypoints=websecure",
         "traefik.http.routers.drawio.middlewares=auth"
       ]
+
       check {
         type     = "tcp"
         interval = "10s"

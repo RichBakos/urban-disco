@@ -1,3 +1,5 @@
+
+
 client {
 
   host_volume "arcade_config" {
@@ -62,11 +64,6 @@ client {
 
   host_volume "mongo" {
     path      = "/mnt/volumes/mongo/data/db"
-    read_only = false
-  }	
-
-  host_volume "mass" {
-    path      = "/mnt/volumes/mass"
     read_only = false
   }	
 

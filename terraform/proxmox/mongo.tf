@@ -1,6 +1,6 @@
 resource "proxmox_vm_qemu" "mongo" {
 
-  depends_on = [ resource.proxmox_vm_qemu.graylog ]
+  depends_on = [resource.proxmox_vm_qemu.graylog]
 
   name        = "mongo01"
   target_node = var.proxmox_nodes[1]

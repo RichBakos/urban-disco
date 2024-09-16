@@ -1,7 +1,9 @@
 job "pgweb" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "pgweb" {
+
     network {
       port "http" { static = 8082 }
     }

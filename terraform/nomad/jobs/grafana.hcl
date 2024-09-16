@@ -1,5 +1,6 @@
 job "grafana" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "grafana" {
 
@@ -33,7 +34,7 @@ job "grafana" {
 
     task "grafana" {
       driver = "docker"
-      user   = 1000
+      user   = "root"
 
       config {
         image        = "grafana/grafana-oss:11.1.3"
@@ -54,13 +55,13 @@ job "grafana" {
       template {
         destination = "secrets/grafana.env"
         env         = true
-        data        = <<EOF
-{{- with nomadVar "nomad/jobs/grafana" }}
-{{- range .Tuples }}
-{{ .K }}={{ .V }}
-{{- end }}
-{{- end }}
-EOF
+        data        = <<-EOF
+        {{- with nomadVar "nomad/jobs/grafana" }}
+          {{- range .Tuples }}
+            {{ .K }}={{ .V }}
+          {{- end }}
+        {{- end }}
+        EOF
       }
     }
   }

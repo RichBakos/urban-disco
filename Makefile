@@ -31,8 +31,8 @@ apply-%:##........Execute a terraform plan
 
 .PHONY: format
 format:##........Format both terraform and nomd job files
-	cd terraform && terraform fmt -recursive -check
-	cd terraform/nomad/jobs && nomad fmt -recursive -check
+	cd terraform && terraform fmt -recursive -write
+	cd terraform/nomad/jobs && nomad fmt -recursive -write
 
 .PHONY: validate-jobs
 validate-jobs:##........Validate all nomad jobs for correctness

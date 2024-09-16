@@ -1,13 +1,13 @@
 job "storage-nodes" {
   type = "system"
-  
+
   group "nodes" {
-  
+
     task "plugin" {
       driver = "docker"
-  
+
       config {
-        image = "registry.k8s.io/sig-storage/nfsplugin:v4.1.0"
+        image      = "registry.k8s.io/sig-storage/nfsplugin:v4.1.0"
         privileged = true
         args = [
           "--v=5",
@@ -22,7 +22,7 @@ job "storage-nodes" {
         type      = "node"
         mount_dir = "/csi"
       }
-      
+
       resources {
         memory = 10
       }

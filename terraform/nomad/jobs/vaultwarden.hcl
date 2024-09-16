@@ -1,6 +1,6 @@
 job "bitwarden" {
-  type     = "service"
-  priority = 85
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "bitwarden" {
 
@@ -27,7 +27,7 @@ job "bitwarden" {
         type     = "tcp"
         port     = "http"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "2s"
       }
     }
 

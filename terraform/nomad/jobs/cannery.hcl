@@ -1,5 +1,6 @@
 job "cannery" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "cannery" {
 
@@ -23,8 +24,8 @@ job "cannery" {
 
       check {
         type     = "tcp"
-        interval = "60s"
-        timeout  = "20s"
+        interval = "10s"
+        timeout  = "2s"
       }
     }
 
@@ -50,13 +51,13 @@ job "cannery" {
       template {
         env         = true
         destination = "secrets/env"
-        data        = <<EOF
-{{- with nomadVar "nomad/jobs/cannery" }}
-{{- range .Tuples }}
-{{ .K }}={{ .V }}
-{{- end }}
-{{- end }}
-EOF        
+        data        = <<-EOF
+        {{- with nomadVar "nomad/jobs/cannery" }}
+          {{- range .Tuples }}
+            {{ .K }}={{ .V }}
+          {{- end }}
+        {{- end }}
+        EOF        
       }
     }
   }

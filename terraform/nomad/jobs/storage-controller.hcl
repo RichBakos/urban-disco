@@ -2,10 +2,10 @@ job "storage-controller" {
   type = "service"
 
   group "controller" {
-  
+
     task "plugin" {
       driver = "docker"
-  
+
       config {
         image = "registry.k8s.io/sig-storage/nfsplugin:v4.1.0"
         args = [
@@ -14,14 +14,14 @@ job "storage-controller" {
           "--endpoint=unix:///csi/csi.sock",
           "--drivername=nfs.csi.k8s.io"
         ]
-  
+
       }
       csi_plugin {
         id        = "nfs"
         type      = "controller"
         mount_dir = "/csi"
       }
-  
+
       resources {
         memory = 32
         cpu    = 100

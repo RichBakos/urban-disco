@@ -1,5 +1,6 @@
 job "prometheus" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "prometheus" {
     network {

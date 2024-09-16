@@ -1,7 +1,7 @@
 
 resource "proxmox_vm_qemu" "opensearch" {
 
-  depends_on = [ resource.proxmox_vm_qemu.mongo ]
+  depends_on = [resource.proxmox_vm_qemu.mongo]
 
   name        = "opensearch01"
   target_node = var.proxmox_nodes[2]

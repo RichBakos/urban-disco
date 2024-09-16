@@ -1,10 +1,6 @@
 job "plex" {
-  type = "service"
-
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client03"
-  }
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "plex" {
 
@@ -32,8 +28,8 @@ job "plex" {
 
       check {
         type     = "tcp"
-        interval = "60s"
-        timeout  = "20s"
+        interval = "10s"
+        timeout  = "2s"
       }
     }
 

@@ -1,5 +1,6 @@
 job "emulatorjs" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "emulatorjs" {
 
@@ -24,8 +25,8 @@ job "emulatorjs" {
     }
 
     service {
-      name     = "arcade"
-      port     = "http"
+      name = "arcade"
+      port = "http"
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.arcade.entrypoints=websecure",
@@ -37,12 +38,12 @@ job "emulatorjs" {
         path     = "/"
         interval = "10s"
         timeout  = "2s"
-      }        
+      }
     }
 
     service {
-      name     = "arcade-admin"
-      port     = "admin"
+      name = "arcade-admin"
+      port = "admin"
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.arcade-admin.entrypoints=websecure",
@@ -54,8 +55,8 @@ job "emulatorjs" {
         path     = "/"
         interval = "10s"
         timeout  = "2s"
-      }          
-    }    
+      }
+    }
 
     task "emulatorjs" {
       driver = "docker"
@@ -74,17 +75,16 @@ job "emulatorjs" {
       volume_mount {
         volume      = "arcade_data"
         destination = "/data"
-      }   
+      }
 
       env {
         PUID = "1000"
         PGID = "1000"
-        TZ   = "Etc/UTC"
+        TZ   = "America/Denver"
       }
 
       resources {
-        cpu = 2000
-        memory = 2048
+        memory_max = 2048
       }
     }
   }

@@ -8,7 +8,7 @@ entryPoints:
           scheme: https
           permanent: true
     proxyProtocol:
-      trustedIPs:         
+      trustedIPs:
         - 172.16.30.1
         
   websecure:

@@ -1,14 +1,27 @@
+resource "nomad_variable" "cannery" {
+  path = "nomad/jobs/cannery"
+  items = {
+    HOST            = "cannery.bakos.me"
+    DATABASE_URL    = var.cannery_database_url
+    SECRET_KEY_BASE = var.cannery_secret_key
+    SMTP_HOST       = "SMTP.GMAIL.COM"
+    SMTP_USERNAME   = "rich@bakos.dev"
+    SMTP_PASSWORD   = var.cannery_smtp_password
+
+  }
+}
+
 resource "nomad_variable" "unifi" {
   path = "nomad/jobs/unifi"
   items = {
-    MONGO_DBNAME     = "unifi"    
-    MONGO_USER       = var.mongo_user
-    MONGO_PASS       = var.mongo_password
+    MONGO_DBNAME               = "unifi"
+    MONGO_USER                 = var.mongo_user
+    MONGO_PASS                 = var.mongo_password
     MONGO_INITDB_ROOT_USERNAME = var.mongo_initdb_root_username
     MONGO_INITDB_ROOT_PASSWORD = var.mongo_initdb_root_password
-    MONGO_HOST       = "mongo.service.consul"
-    MONGO_PORT       = "27017"
-    MONGO_AUTHSOURCE = "admin"
+    MONGO_HOST                 = "mongo.service.consul"
+    MONGO_PORT                 = "27017"
+    MONGO_AUTHSOURCE           = "admin"
   }
 }
 
@@ -34,7 +47,7 @@ resource "nomad_variable" "postgres" {
 resource "nomad_variable" "mongo" {
   path = "nomad/jobs/mongo"
   items = {
-    MONGO_DBNAME               = "unifi"    
+    MONGO_DBNAME               = "unifi"
     MONGO_USER                 = var.mongo_user
     MONGO_PASS                 = var.mongo_password
     MONGO_INITDB_ROOT_USERNAME = var.mongo_initdb_root_username

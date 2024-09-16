@@ -1,10 +1,6 @@
 job "auth" {
-  type     = "service"
-
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client01"
-  }
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "auth" {
 
@@ -27,7 +23,7 @@ job "auth" {
         type     = "http"
         path     = "/"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "2s"
       }
     }
 
@@ -45,11 +41,11 @@ job "auth" {
         env         = true
         destination = "secrets/auth.env"
         data        = <<-EOF
-        {{- with nomadVar "nomad/jobs/auth" }}
-          {{- range .Tuples }}
-            {{ .K }}={{ .V }}
+          {{- with nomadVar "nomad/jobs/auth" }}
+            {{- range .Tuples }}
+              {{ .K }}={{ .V }}
+            {{- end }}
           {{- end }}
-        {{- end }}
         EOF
       }
 

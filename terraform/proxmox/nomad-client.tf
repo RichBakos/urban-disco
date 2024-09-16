@@ -1,16 +1,17 @@
-resource "proxmox_vm_qemu" "graylog" {
+resource "proxmox_vm_qemu" "nomad-client" {
 
-  depends_on = [resource.proxmox_vm_qemu.cluster-services]
+  depends_on = [resource.proxmox_vm_qemu.nomad-server]
 
-  name        = "graylog01"
-  target_node = var.proxmox_nodes[0]
-  clone       = "cluster-services"
+  count       = 3
+  name        = var.client_hostname[count.index]
+  target_node = var.proxmox_nodes[count.index]
+  clone       = "nomad-client"
   full_clone  = true
 
-  cores     = 2
+  cores     = 4
   sockets   = 1
   cpu       = "host"
-  memory    = 2048
+  memory    = 10240
   scsihw    = "virtio-scsi-single"
   bootdisk  = "scsi0"
   bios      = "seabios"
@@ -24,18 +25,21 @@ resource "proxmox_vm_qemu" "graylog" {
   sshkeys    = var.proxmox_sshkeys
   ipconfig0  = "ip=dhcp"
 
+
   network {
     model  = "virtio"
     bridge = var.bridge
     tag    = var.vlan_tag
 
+    # For DHCP reservation   
+    macaddr = var.client_mac_addr[count.index]
   }
 
   disks {
     scsi {
       scsi0 {
         disk {
-          size       = "4G"
+          size       = "24G"
           storage    = var.storage_pool
           iothread   = true
           emulatessd = true
@@ -56,4 +60,3 @@ resource "proxmox_vm_qemu" "graylog" {
     ignore_changes = all
   }
 }
-

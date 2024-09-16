@@ -1,5 +1,6 @@
 job "influxdb" {
-  type = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "influxdb" {
 
@@ -30,7 +31,7 @@ job "influxdb" {
         type     = "tcp"
         port     = "http"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "1s"
       }
     }
 
@@ -61,13 +62,13 @@ job "influxdb" {
       template {
         env         = true
         destination = "secrets/.env"
-        data        = <<EOF
-{{- with nomadVar "nomad/jobs/influxdb" }}
-{{- range .Tuples }}
-{{ .K }}={{ .V }}
-{{- end }}
-{{- end }}        
-EOF
+        data        = <<-EOF
+        {{- with nomadVar "nomad/jobs/influxdb" }}
+          {{- range .Tuples }}
+            {{ .K }}={{ .V }}
+          {{- end }}
+        {{- end }}        
+        EOF
       }
     }
   }

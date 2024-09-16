@@ -1,5 +1,5 @@
 source "proxmox-iso" "nomad-client" {
-  proxmox_url              = var.proxmox_url
+  proxmox_url              = var.proxmox_api_url
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
   insecure_skip_tls_verify = true

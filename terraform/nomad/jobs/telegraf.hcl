@@ -1,5 +1,6 @@
 job "telegraf" {
-  type = "system"
+  datacenters = ["dc1"]
+  type        = "system"
 
   group "telegraf" {
 
@@ -35,28 +36,27 @@ job "telegraf" {
       }
 
       template {
-        data        = <<EOH
-[global_tags]
-  realm = 'home'
-  role = 'nomad'
-[agent]
-[[outputs.prometheus_client]]
-  listen = ':9273'
-[[inputs.cpu]]
-  percpu = true
-  totalcpu = true
-[[inputs.disk]]
-  ignore_fs = ['tmpfs', 'devtmpfs']
-[[inputs.diskio]]
-[[inputs.kernel]]
-[[inputs.mem]]
-[[inputs.net]]
-[[inputs.ntpq]]
-[[inputs.processes]]
-[[inputs.swap]]
-[[inputs.system]]
-
-EOH
+        data        = <<-EOH
+        [global_tags]
+          realm = 'home'
+          role = 'nomad'
+        [agent]
+        [[outputs.prometheus_client]]
+          listen = ':9273'
+        [[inputs.cpu]]
+          percpu = true
+          totalcpu = true
+        [[inputs.disk]]
+          ignore_fs = ['tmpfs', 'devtmpfs']
+        [[inputs.diskio]]
+        [[inputs.kernel]]
+        [[inputs.mem]]
+        [[inputs.net]]
+        [[inputs.ntpq]]
+        [[inputs.processes]]
+        [[inputs.swap]]
+        [[inputs.system]]
+        EOH
         destination = "local/config.yaml"
         env         = false
       }

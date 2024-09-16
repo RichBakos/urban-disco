@@ -29,7 +29,7 @@ job "traefik" {
       check {
         type     = "tcp"
         interval = "10s"
-        timeout  = "30s"
+        timeout  = "2s"
       }
     }
 

@@ -1,6 +1,6 @@
 source "proxmox-iso" "cluster-services" {
 
-  proxmox_url              = var.proxmox_url
+  proxmox_url              = var.proxmox_api_url
   username                 = var.proxmox_api_user
   password                 = var.proxmox_api_password
   node                     = var.proxmox_node

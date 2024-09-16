@@ -1,10 +1,6 @@
 job "sonarr" {
-  type = "service"
-
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client01"
-  }
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "sonarr" {
 

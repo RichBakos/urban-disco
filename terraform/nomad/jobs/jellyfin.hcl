@@ -1,10 +1,6 @@
 job "jellyfin" {
-  type = "service"
-
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client01"
-  }
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "jellyfin" {
 
@@ -33,8 +29,8 @@ job "jellyfin" {
 
       check {
         type     = "tcp"
-        interval = "60s"
-        timeout  = "20s"
+        interval = "10s"
+        timeout  = "2s"
       }
     }
 

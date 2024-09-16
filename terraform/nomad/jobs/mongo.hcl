@@ -1,9 +1,13 @@
 job "mongo" {
-  type     = "service"
+  datacenters = ["dc1"]
+  type        = "service"
 
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client03"
+  reschedule {
+    attempts       = 5
+    interval       = "1h"
+    unlimited      = false
+    delay          = "5s"
+    delay_function = "constant"
   }
 
   group "mongo" {
@@ -54,7 +58,7 @@ job "mongo" {
           {{- end }}
         {{- end }}
         EOF
-      }      
+      }
     }
   }
 }

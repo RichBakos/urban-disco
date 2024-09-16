@@ -1,10 +1,6 @@
 job "transmission" {
-  type = "service"
-
-  constraint {
-    attribute = "${attr.unique.hostname}"
-    value     = "client03"
-  }
+  datacenters = ["dc1"]
+  type        = "service"
 
   group "transmission" {
 
