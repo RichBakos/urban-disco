@@ -36,10 +36,6 @@ module "nomad" {
   auth_client_secret   = var.auth_client_secret
   auth_secret          = var.auth_secret
   auth_whitelist_email = var.auth_whitelist_email
-  # Cannery
-  cannery_database_url  = var.cannery_database_url
-  cannery_smtp_password = var.cannery_smtp_password
-  cannery_secret_key    = var.cannery_secret_key
   # Grafana
   grafana_url      = var.grafana_url
   grafana_email    = var.grafana_email

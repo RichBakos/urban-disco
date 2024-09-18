@@ -6,7 +6,7 @@ set -o errexit
 sudo apt-get update && apt-get install -y consul nomad cloud-init
 
 # Add gluster mount in fstab
-sudo echo "172.16.20.202:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=172.16.20.203 0 0" >> /etc/fstab
+sudo echo "pve02.bakos.me:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=pve03.bakos.me 0 0" >> /etc/fstab
 
 # Remove consul and nomad defaults, install our configs, including host volumes
 sudo rm /etc/consul.d/* /etc/nomad.d/*

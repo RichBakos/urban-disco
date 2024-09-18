@@ -39,7 +39,7 @@ job "unifi" {
       driver = "docker"
 
       config {
-        image        = "linuxserver/unifi-network-application:8.4.59"
+        image        = "linuxserver/unifi-network-application:8.4.62"
         network_mode = "host"
         ports        = ["http"]
         volumes = [

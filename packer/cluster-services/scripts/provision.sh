@@ -6,25 +6,17 @@ set -o errexit
 sudo apt-get update && apt-get install -y glusterfs-client docker-ce consul cloud-init
 
 # Add gluster mount in fstab
-sudo echo "172.16.20.202:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=172.16.20.203 0 0" >> /etc/fstab
+sudo echo "pve02.bakos.me:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=pve03.bakos.me 0 0" >> /etc/fstab
 
-# Add gluster hosts to... Hosts
-sudo echo "172.16.20.201 pmx201.bakos.lan" >> /etc/cloud/templates/hosts.debian.tmpl
-sudo echo "172.16.20.202 pmx202.bakos.lan" >> /etc/cloud/templates/hosts.debian.tmpl
-sudo echo "172.16.20.203 pmx203.bakos.lan" >> /etc/cloud/templates/hosts.debian.tmpl
-
-# Configure resolv.conf
-sudo apt-get remove -y systemd-resolved
-sudo rm /etc/resolv.conf
-sudo touch /etc/resolv.conf
-sudo echo "nameserver 172.16.30.2" >> /etc/resolv.conf
-sudo echo "nameserver 172.16.30.1" >> /etc/resolv.conf
+# Add gluster hosts to... Hosts 
+sudo echo "192.168.1.10  pve01.bakos.me" >> /etc/cloud/templates/hosts.debian.tmpl
+sudo echo "192.168.1.11  pve02.bakos.me" >> /etc/cloud/templates/hosts.debian.tmpl
+sudo echo "192.168.1.12  pve03.bakos.me" >> /etc/cloud/templates/hosts.debian.tmpl
 
 # Remove consul/nomad defaults, install our configs, setup consul services
 sudo rm /etc/consul.d/*
 sudo cp /tmp/configs/consul/client.hcl /etc/consul.d/consul.hcl
 sudo cp /tmp/configs/consul/dns.service.hcl /etc/consul.d/dns.service.hcl
-sudo cp /tmp/configs/consul/nfs.service.hcl /etc/consul.d/nfs.service.hcl
 sudo systemctl enable consul
 
 # Setup coredns in docker

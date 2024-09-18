@@ -7,7 +7,7 @@ data_dir           = "/opt/consul"
 datacenter         = "dc1"
 enable_syslog      = true
 log_level          = "warn"
-retry_join         = ["172.16.30.20", "172.16.30.21", "172.16.30.22"]
+retry_join   = ["server01.bakos.me","server02.bakos.me", "server03.bakos.me"]
 acl {
   enabled = true
 }

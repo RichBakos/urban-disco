@@ -1,5 +1,3 @@
-
-
 client {
 
   host_volume "arcade_config" {
@@ -32,8 +30,8 @@ client {
     read_only = false
   }	
 
-  host_volume "home-assistant" {
-    path      = "/mnt/volumes/home-assistant"
+  host_volume "hass" {
+    path      = "/mnt/volumes/hass"
     read_only = false
   }
 

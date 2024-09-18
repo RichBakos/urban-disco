@@ -8,9 +8,9 @@ job "home-assistant" {
       port "http" { static = "8123" }
     }
 
-    volume "home-assistant" {
+    volume "hass" {
       type   = "host"
-      source = "home-assistant"
+      source = "hass"
     }
 
     service {
@@ -31,15 +31,15 @@ job "home-assistant" {
     task "home-assistant" {
       driver = "docker"
 
-      volume_mount {
-        volume      = "home-assistant"
-        destination = "/config"
-      }
-
       config {
-        image        = "homeassistant/home-assistant:2024.8.3"
+        image        = "homeassistant/home-assistant:2024.9.2"
         ports        = ["http"]
         network_mode = "host"
+      }
+
+      volume_mount {
+        volume      = "hass"
+        destination = "/config"
       }
 
       env {

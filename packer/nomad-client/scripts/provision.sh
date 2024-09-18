@@ -6,12 +6,12 @@ set -o errexit
 sudo apt-get update && apt-get install -y glusterfs-client docker-ce nfs-common consul nomad cloud-init
 
 # Add gluster mount in fstab
-sudo echo "172.16.20.202:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=172.16.20.203 0 0" >> /etc/fstab
+sudo echo "pve02.bakos.me:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=pve03.bakos.me 0 0" >> /etc/fstab
 
-# Add Gluster hosts to Hosts
-sudo echo "172.16.20.201 pmx201.bakos.lan" >> /etc/cloud/templates/hosts.debian.tmpl
-sudo echo "172.16.20.202 pmx202.bakos.lan" >> /etc/cloud/templates/hosts.debian.tmpl
-sudo echo "172.16.20.203 pmx203.bakos.lan" >> /etc/cloud/templates/hosts.debian.tmpl
+# Add gluster hosts to... Hosts 
+sudo echo "192.168.1.10  pve01.bakos.me" >> /etc/cloud/templates/hosts.debian.tmpl
+sudo echo "192.168.1.11  pve02.bakos.me" >> /etc/cloud/templates/hosts.debian.tmpl
+sudo echo "192.168.1.12  pve03.bakos.me" >> /etc/cloud/templates/hosts.debian.tmpl
 
 # Remove consul and nomad defaults, install our configs, including host volumes
 sudo rm /etc/consul.d/* /etc/nomad.d/*

@@ -25,7 +25,6 @@ source "proxmox-iso" "cluster-services" {
   network_adapters {
     bridge   = var.bridge
     model    = "virtio"
-    vlan_tag = var.vlan_tag
   }
 
   disks {

@@ -1,16 +1,3 @@
-resource "nomad_variable" "cannery" {
-  path = "nomad/jobs/cannery"
-  items = {
-    HOST            = "cannery.bakos.me"
-    DATABASE_URL    = var.cannery_database_url
-    SECRET_KEY_BASE = var.cannery_secret_key
-    SMTP_HOST       = "SMTP.GMAIL.COM"
-    SMTP_USERNAME   = "rich@bakos.dev"
-    SMTP_PASSWORD   = var.cannery_smtp_password
-
-  }
-}
-
 resource "nomad_variable" "unifi" {
   path = "nomad/jobs/unifi"
   items = {

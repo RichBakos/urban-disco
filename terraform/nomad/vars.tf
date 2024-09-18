@@ -25,22 +25,6 @@ variable "auth_whitelist_email" {
   description = "The email to be whitelisted by the forwardAuth plugin"
 }
 
-###--- Cannery vars ---###
-variable "cannery_database_url" {
-  type        = string
-  description = "The databse for cannery"
-}
-
-variable "cannery_smtp_password" {
-  type        = string
-  description = "The smtp password for the cannery admin"
-}
-
-variable "cannery_secret_key" {
-  type        = string
-  description = "The secret key base for cannery"
-}
-
 ###--- Grafana vars ---###
 
 variable "grafana_email" {
