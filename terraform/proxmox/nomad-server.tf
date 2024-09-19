@@ -28,7 +28,6 @@ resource "proxmox_vm_qemu" "nomad-server" {
   network {
     model  = "virtio"
     bridge = var.bridge
-    tag    = var.vlan_tag
 
     # For DHCP reservation
     macaddr = var.server_mac_addr[count.index]

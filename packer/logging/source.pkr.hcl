@@ -25,7 +25,6 @@ source "proxmox-iso" "logging" {
   network_adapters {
     bridge   = var.bridge
     model    = "virtio"
-    vlan_tag = var.vlan_tag
   }
 
   disks {

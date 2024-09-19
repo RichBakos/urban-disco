@@ -65,11 +65,6 @@ variable "storage_pool" {
   description = "The storage pool for the systems"
 }
 
-variable "vlan_tag" {
-  type        = string
-  description = "The vlan that the cluster will run under"
-}
-
 variable "bridge" {
   type        = string
   description = "The network bridge used by the virtual machines"

@@ -17,7 +17,6 @@ module "proxmox" {
   proxmox_sshkeys      = var.proxmox_sshkeys
   proxmox_service_node = var.proxmox_service_node
   storage_pool         = var.storage_pool
-  vlan_tag             = var.vlan_tag
   bridge               = var.bridge
 }
 

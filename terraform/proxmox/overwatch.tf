@@ -1,8 +1,8 @@
-resource "proxmox_vm_qemu" "cluster-services" {
+resource "proxmox_vm_qemu" "overwatch" {
 
-  name        = "services01"
-  target_node = var.proxmox_nodes[2]
-  clone       = "cluster-services"
+  name        = "overwatch"
+  target_node = var.proxmox_nodes[1]
+  clone       = "overwatch-server"
   full_clone  = true
 
   cores     = 2
@@ -25,10 +25,7 @@ resource "proxmox_vm_qemu" "cluster-services" {
 
   network {
     model  = "virtio"
-    bridge = var.bridge
-
-    # Used in place of static IP  
-    macaddr = "bc:24:11:cd:cd:50"
+    bridge = var.bridge    
   }
 
   disks {
