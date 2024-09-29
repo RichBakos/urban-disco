@@ -1,4 +1,4 @@
-###--- Proxmox vars ---###
+### Proxmox
 variable "proxmox_api_url" {
   type        = string
   description = "The url to Proxmox"
@@ -14,34 +14,9 @@ variable "proxmox_password" {
   description = "The password for the user that Telmate will use to log into Proxmox"
 }
 
-variable "proxmox_nodes" {
-  type        = list(string)
-  description = "The proxmox nodes that nomad clients will be deployed to"
-}
-
 variable "proxmox_service_node" {
   type        = string
   description = "The proxmox node that cluster services will be deployed to"
-}
-
-variable "server_mac_addr" {
-  type        = list(string)
-  description = "The mac addr of the nomad server"
-}
-
-variable "server_hostname" {
-  type        = list(string)
-  description = "The host name of the nomad server"
-}
-
-variable "client_mac_addr" {
-  type        = list(string)
-  description = "The mac addr of the nomad client"
-}
-
-variable "client_hostname" {
-  type        = list(string)
-  description = "The host name of the nomad client"
 }
 
 variable "ciuser" {
@@ -59,7 +34,17 @@ variable "proxmox_sshkeys" {
   description = "The system user's ssh keys to be configured by cloud-init"
 }
 
-###--- Auth vars ---###
+variable "storage_pool" {
+  type        = string
+  description = "The storage pool for the systems"
+}
+
+variable "bridge" {
+  type        = string
+  description = "The network bridge used by the virtual machines"
+}
+
+### ForwardAuth
 variable "auth_domain" {
   type        = string
   description = "The domain of the homelab"
@@ -85,7 +70,7 @@ variable "auth_whitelist_email" {
   description = "The email to be whitelisted by the forwardAuth plugin"
 }
 
-###--- Grafana vars ---###
+### Grafana
 variable "grafana_email" {
   type        = string
   description = "The username of the grafana admin"
@@ -101,6 +86,7 @@ variable "grafana_url" {
   description = "The URL of the grafana instance"
 }
 
+### Postgres
 variable "postgres_root_user" {
   type        = string
   description = "The root user for postgres"
@@ -111,7 +97,7 @@ variable "postgres_root_password" {
   description = "The password for the Postgres root user"
 }
 
-###--- Influxdb vars ---###
+### Influxdb
 variable "influxdb_password" {
   type        = string
   description = "The password for the Postgres root user"
@@ -122,7 +108,7 @@ variable "influxdb_user" {
   description = "The root user for postgres"
 }
 
-###--- Samba vars ---###
+### Samba
 variable "samba_password" {
   type        = string
   description = "The password for samba"
@@ -138,7 +124,7 @@ variable "samba_uid" {
   description = "The UID for the samba user"
 }
 
-###--- Mongo vars ---###
+### Mongo
 variable "mongo_password" {
   type        = string
   description = "The mongo password for the Unifi db"
@@ -159,19 +145,8 @@ variable "mongo_initdb_root_password" {
   description = "The mongo password for the auth db"
 }
 
-###--- Plex vars ---###
+### Plex
 variable "plex_auth_token" {
   type        = string
   description = "The API of the plex instance"
-}
-
-variable "storage_pool" {
-  type        = string
-  description = "The storage pool for the systems"
-}
-
-
-variable "bridge" {
-  type        = string
-  description = "The network bridge used by the virtual machines"
 }

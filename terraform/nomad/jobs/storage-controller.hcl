@@ -1,5 +1,6 @@
 job "storage-controller" {
-  type = "service"
+  datacenters = ["dc1"]  
+  type        = "service"
 
   group "controller" {
 

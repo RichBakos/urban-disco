@@ -1,0 +1,10 @@
+.:53 {
+   forward . 127.0.0.0:5353
+    log
+}  
+
+consul.:53 {
+    errors
+    forward . 127.0.0.1:8600
+    log
+}

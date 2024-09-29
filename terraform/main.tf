@@ -8,11 +8,6 @@ module "proxmox" {
   cipassword           = var.cipassword
   proxmox_api_url      = var.proxmox_api_url
   proxmox_password     = var.proxmox_password
-  proxmox_nodes        = var.proxmox_nodes
-  client_mac_addr      = var.client_mac_addr
-  client_hostname      = var.client_hostname
-  server_mac_addr      = var.server_mac_addr
-  server_hostname      = var.server_hostname
   proxmox_user         = var.proxmox_user
   proxmox_sshkeys      = var.proxmox_sshkeys
   proxmox_service_node = var.proxmox_service_node
@@ -22,12 +17,12 @@ module "proxmox" {
 
 module "consul" {
   source     = "./consul"
-  depends_on = [module.proxmox]
+  depends_on = [module.proxmox.configured]
 }
 
 module "nomad" {
   source     = "./nomad"
-  depends_on = [module.consul]
+  depends_on = [module.consul.configured]
 
   # Traefik forward auth
   auth_domain          = var.auth_domain

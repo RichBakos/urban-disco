@@ -1,10 +1,10 @@
 resource "proxmox_vm_qemu" "nomad-server" {
 
-  #depends_on = [resource.proxmox_vm_qemu.opensearch]
+ depends_on = [resource.proxmox_vm_qemu.coredns]
 
   count       = 3
-  name        = var.server_hostname[count.index]
-  target_node = var.proxmox_nodes[count.index]
+  name        = "server0${count.index+1}"
+  target_node = "pve0${count.index+1}"
   clone       = "nomad-server"
   full_clone  = true
 
@@ -28,9 +28,6 @@ resource "proxmox_vm_qemu" "nomad-server" {
   network {
     model  = "virtio"
     bridge = var.bridge
-
-    # For DHCP reservation
-    macaddr = var.server_mac_addr[count.index]
   }
 
   disks {
@@ -57,5 +54,16 @@ resource "proxmox_vm_qemu" "nomad-server" {
   lifecycle {
     ignore_changes = all
   }
+
+  # provisioner "remote-exec" {
+  #   inline = [ "sudo reboot now" ]
+
+  #   connection {
+  #     type     = "ssh"
+  #     user     = var.ciuser
+  #     password = var.cipassword
+  #     host     = self.default_ipv4_address
+  #   }
+  # } 
 }
 

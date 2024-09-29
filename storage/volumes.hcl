@@ -15,11 +15,6 @@ client {
     read_only = false
   }
 
-	host_volume "cannery" {
-    path      = "/mnt/volumes/cannery"
-    read_only = false
-  }
-
   host_volume "docker-sock-ro" {
     path = "/var/run/docker.sock"
     read_only = true

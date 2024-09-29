@@ -1,7 +1,7 @@
-###--- Change to spread for + distribution ---###
+###--- Change to spread for better distribution ---###
 resource "nomad_scheduler_config" "config" {
   scheduler_algorithm             = "spread"
-  memory_oversubscription_enabled = true
+  memory_oversubscription_enabled = false
   preemption_config = {
     system_scheduler_enabled   = true
     batch_scheduler_enabled    = true
@@ -101,6 +101,7 @@ resource "nomad_job" "telegraf" {
 
 resource "nomad_job" "traefik" {
   jobspec = file("${path.module}/jobs/traefik.hcl")
+  depends_on = [resource.nomad_job.auth]
 }
 
 resource "nomad_job" "transmission" {
@@ -109,7 +110,7 @@ resource "nomad_job" "transmission" {
 
 resource "nomad_job" "unifi" {
   jobspec    = file("${path.module}/jobs/unifi.hcl")
-  depends_on = [nomad_job.mongo]
+  depends_on = [resource.nomad_job.mongo]
 }
 
 resource "nomad_job" "vaultwarden" {

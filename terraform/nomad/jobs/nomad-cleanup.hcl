@@ -1,5 +1,6 @@
 job "nomad-cleanup" {
-  type = "batch"
+  datacenters = ["dc1"]
+  type        = "batch"
 
   periodic {
     crons            = ["@daily"]

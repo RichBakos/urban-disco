@@ -4,7 +4,7 @@ job "unifi" {
 
   constraint {
     attribute = "${attr.unique.hostname}"
-    value     = "client01"
+    value     = "client03"
   }
 
   group "unifi" {

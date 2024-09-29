@@ -35,8 +35,7 @@ job "auth" {
         network_mode = "host"
         ports        = ["http"]
       }
-
-
+      
       template {
         env         = true
         destination = "secrets/auth.env"

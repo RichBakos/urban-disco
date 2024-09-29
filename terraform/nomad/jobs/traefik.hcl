@@ -1,6 +1,6 @@
 job "traefik" {
-  type     = "system"
-  priority = 90
+  datacenters = ["dc1"]  
+  type        = "system"
 
   group "traefik" {
 
@@ -37,7 +37,7 @@ job "traefik" {
       driver = "docker"
 
       config {
-        image        = "traefik:3.1.2"
+        image        = "traefik:3.1.4"
         ports        = ["http", "https", "postgres"]
         network_mode = "host"
         volumes = [

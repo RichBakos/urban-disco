@@ -15,34 +15,9 @@ variable "proxmox_password" {
   description = "The password for the user that Telmate will use to log into Proxmox"
 }
 
-variable "proxmox_nodes" {
-  type        = list(string)
-  description = "The proxmox nodes that nomad clients will be deployed to"
-}
-
 variable "proxmox_service_node" {
   type        = string
   description = "The proxmox node that cluster services will be deployed to"
-}
-
-variable "server_mac_addr" {
-  type        = list(string)
-  description = "The mac addr of the nomad server"
-}
-
-variable "server_hostname" {
-  type        = list(string)
-  description = "The host name of the nomad server"
-}
-
-variable "client_mac_addr" {
-  type        = list(string)
-  description = "The mac addr of the nomad client"
-}
-
-variable "client_hostname" {
-  type        = list(string)
-  description = "The host name of the nomad client"
 }
 
 variable "ciuser" {

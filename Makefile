@@ -17,16 +17,12 @@ init-upgrade:## upgrade terraform with the latest providers
 plan:##........Create an execution plan for terraform
 	cd terraform && terraform plan
 
-.PHONY: plan-%
-plan-%:##........Create an execution plan for terraform
-	cd terraform && terraform plan -target=module.$*
-
 .PHONY: apply
 apply:##........Execute a terraform plan
 	cd terraform && terraform apply --parallelism=1 --auto-approve
 
 .PHONY: apply-%
-apply-%:##........Execute a terraform plan
+apply-%:##........Execute a module within a terraform plan
 	cd terraform && terraform apply -target=module.$* --auto-approve	
 
 .PHONY: format
@@ -40,4 +36,4 @@ validate-jobs:##........Validate all nomad jobs for correctness
 
 .PHONY: build-%
 build-%:##........Build and image with packer
-	cd packer/$* && packer build -var-file=../packer.pkrvars.hcl .
+	cd packer/$* && packer build -var-file=../vars/packer.pkrvars.hcl .

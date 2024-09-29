@@ -1,5 +1,6 @@
 job "wikijs" {
-  type = "service"
+  datacenters = ["dc1"]  
+  type        = "service"
 
   group "wikijs" {
 

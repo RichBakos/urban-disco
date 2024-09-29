@@ -9,7 +9,7 @@ entryPoints:
           permanent: true
     proxyProtocol:
       trustedIPs:
-        - 172.16.30.1
+        - 192.168.2.1
         
   websecure:
     address: :443
@@ -17,7 +17,7 @@ entryPoints:
       tls: true
     proxyProtocol:
       trustedIPs:
-        - 172.16.30.1
+        - 192.168.2.1
 
   postgres:
     address: :5432

@@ -1,5 +1,6 @@
 job "docker-cleanup" {
-  type = "sysbatch"
+  datacenters = ["dc1"]  
+  type        = "sysbatch"
 
   periodic {
     crons            = ["@daily"]

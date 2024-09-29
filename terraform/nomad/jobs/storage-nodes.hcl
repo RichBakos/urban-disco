@@ -1,5 +1,6 @@
 job "storage-nodes" {
-  type = "system"
+  datacenters = ["dc1"]  
+  type        = "system"
 
   group "nodes" {
 

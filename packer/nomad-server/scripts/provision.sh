@@ -2,27 +2,25 @@
 
 set -o errexit
 
-# Add packages
+DEBIAN_FRONTEND=noninteractive
+
+# Add Hashicorp repo
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update
+
+# Install consul, nomad, cloud-init
 sudo apt-get update && apt-get install -y consul nomad cloud-init
 
-# Add gluster mount in fstab
-sudo echo "pve02.bakos.me:/data /mnt glusterfs defaults,_netdev,noauto,x-systemd.automount,backupvolfile-server=pve03.bakos.me 0 0" >> /etc/fstab
-
-# Remove consul and nomad defaults, install our configs, including host volumes
+# Configure consul and nomad
 sudo rm /etc/consul.d/* /etc/nomad.d/*
 sudo cp /tmp/configs/consul/server.hcl /etc/consul.d/consul.hcl
 sudo cp /tmp/configs/nomad/server.hcl /etc/nomad.d/nomad.hcl
-
-# Enable consul and nomad
 sudo systemctl enable consul nomad
 
-# Prohibit ssh for root
+# Disable root
 sudo /usr/bin/passwd -l root
 sudo sed -e 's/PermitRootLogin yes/#PermitRootLogin prohibit-password/' -i /etc/ssh/sshd_config
-
-# Truncate machine-id
-sudo truncate -s 0 /etc/machine-id
-sudo truncate -s 0 /var/lib/dbus/machine-id
 
 # Cleanup tmp
 sudo find /tmp -type f -atime +10 -delete

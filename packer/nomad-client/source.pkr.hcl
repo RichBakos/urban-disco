@@ -7,7 +7,7 @@ source "proxmox-iso" "nomad-client" {
   
   vm_id                   = 9002
   vm_name                 = "nomad-client"
-  template_description    = "Nomad client (Debian 12) built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
+  template_description    = "Managed by terraform, built on ${formatdate("MM/DD/YYYY hh:mm:ss ZZZ", timestamp())}"
 
   os                      = "l26"
   cpu_type                = "host"

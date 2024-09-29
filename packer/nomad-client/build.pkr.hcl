@@ -1,28 +1,22 @@
 build {
   sources = ["source.proxmox-iso.nomad-client"]
 
-  # Copy shared config files up to tmp
+  # Copy volumes up to tmp
   provisioner "file" {
     destination = "/tmp"
-    source      = "../shared-config"
+    source      = "../../storage"
+  }  
+
+  # Copy config up to tmp
+  provisioner "file" {
+    destination = "/tmp"
+    source      = "../configs"
   }
 
-  # Copy local scripts up to tmp
+  # Copy provisioner up to tmp
   provisioner "file" {
     destination = "/tmp"
     source      = "./scripts"
-  }
-
-  # Copy local configs up to tmp
-  provisioner "file" {
-    destination = "/tmp"
-    source      = "./configs"
-  }
-
-  # Add repos
-  provisioner "shell" {
-    inline_shebang  = "/bin/bash -e"
-    inline          = ["/bin/bash /tmp/shared-config/repos.sh"]
   }
 
   # Provision
@@ -30,11 +24,5 @@ build {
     inline_shebang  = "/bin/bash -e"
     inline          = ["/bin/bash /tmp/scripts/provision.sh"]
   }
-
-  # Copy volumes up into place
-  provisioner "file" {
-    destination = "/etc/nomad.d/volumes.hcl"
-    source      = "../../storage/volumes.hcl"
-  }  
  
 }

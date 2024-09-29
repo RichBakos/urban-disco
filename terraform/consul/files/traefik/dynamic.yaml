@@ -5,79 +5,79 @@ tls:
         certFile: "/etc/traefik/certs/bakos.me.crt"
         keyFile: "/etc/traefik/certs/bakos.me.key"
 
-http:
-  routers:
-    nomad:
-      service: nomad
-      rule: Host(`nomad.bakos.me`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth
+# http:
+#   routers:
+#     nomad:
+#       service: nomad
+#       rule: Host(`nomad.bakos.me`)
+#       entrypoints:
+#         - websecure
+#       middlewares:
+#         - auth
 
-    consul:
-      service: consul
-      rule: Host(`consul.bakos.me`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth   
+#     consul:
+#       service: consul
+#       rule: Host(`consul.bakos.me`)
+#       entrypoints:
+#         - websecure
+#       middlewares:
+#         - auth   
 
-    pfsense:
-      service: pfsense
-      rule: Host(`pfsense.bakos.me`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth   
+#     pfsense:
+#       service: pfsense
+#       rule: Host(`pfsense.bakos.me`)
+#       entrypoints:
+#         - websecure
+#       middlewares:
+#         - auth   
 
-    pve:
-      service: pve
-      rule: Host(`pve.bakos.me`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth   
+#     pve:
+#       service: pve
+#       rule: Host(`pve.bakos.me`)
+#       entrypoints:
+#         - websecure
+#       middlewares:
+#         - auth   
 
-    pve-backup:
-      service: pve-backup
-      rule: Host(`pve-backup.bakos.me`)
-      entrypoints:
-        - websecure
-      middlewares:
-        - auth   
+#     pve-backup:
+#       service: pve-backup
+#       rule: Host(`pve-backup.bakos.me`)
+#       entrypoints:
+#         - websecure
+#       middlewares:
+#         - auth   
 
-  middlewares:
-    auth:
-      forwardAuth:
-        address: http://auth.service.consul:4181
-        authResponseHeaders:
-          - X-Forwarded-User
-        trustForwardHeader: true
+#   middlewares:
+#     auth:
+#       forwardAuth:
+#         address: http://auth.service.consul:4181
+#         authResponseHeaders:
+#           - X-Forwarded-User
+#         trustForwardHeader: true
 
-  services:
-    nomad:
-      loadbalancer:
-        servers:
-          - url: http://server01.bakos.lan:4646
+#   services:
+#     nomad:
+#       loadbalancer:
+#         servers:
+#           - url: http://server01.bakos.lan:4646
 
-    consul:
-      loadbalancer:
-        servers:
-          - url: http://server01.bakos.lan:8500
+#     consul:
+#       loadbalancer:
+#         servers:
+#           - url: http://server01.bakos.lan:8500
 
-    pfsense:
-      loadbalancer:
-        servers:
-          - url: https://172.16.10.1:8443
+#     pfsense:
+#       loadbalancer:
+#         servers:
+#           - url: https://192.168.1.1:8443
     
-    pve:
-      loadbalancer:
-        servers:
-          - url: https://172.16.20.201:8006
+#     pve:
+#       loadbalancer:
+#         servers:
+#           - url: https://192.168.1.10:8006
 
-    pve-backup:
-      loadbalancer:
-        servers:
-          - url: https://172.16.20.200:8007
+#     pve-backup:
+#       loadbalancer:
+#         servers:
+#           - url: https://192.168.1.13:8007
                     
