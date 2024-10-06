@@ -8,14 +8,20 @@ job "sabnzbd" {
       port "http" { to = "8080" }
     }
 
-    volume sabnzbd {
-      type   = "host"
-      source = "sabnzbd"
+    volume "sabnzbd" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "sabnzbd"
     }
 
-    volume media {
-      type   = "host"
-      source = "media"
+    volume "media" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+      read_only       = false
+      source          = "media"
     }
 
     service {

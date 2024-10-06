@@ -1,3 +1,14 @@
+resource "consul_key_prefix" "home-assistant" {
+  path_prefix = "homelab/hass/"
+  subkeys = {
+    "automations.yaml" = file("${path.module}/files/home-assistant/automations.yaml"),
+    "configuration.yaml" = file("${path.module}/files/home-assistant/configuration.yaml"),
+    "covers.yaml" = file("${path.module}/files/home-assistant/covers.yaml"),
+    "customize.yaml" = file("${path.module}/files/home-assistant/customize.yaml"),
+    "lights.yaml" = file("${path.module}/files/home-assistant/lights.yaml"),
+  }
+}
+
 resource "consul_key_prefix" "prometheus" {
   path_prefix = "homelab/prometheus/"
   subkeys = {

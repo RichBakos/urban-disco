@@ -8,14 +8,20 @@ job "influxdb" {
       port "http" { static = "8086" }
     }
 
-    volume "influxdb-config" {
-      type   = "host"
-      source = "influxdb-config"
+    volume "influxdb_config" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "influxdb_config"
     }
 
-    volume "influxdb-data" {
-      type   = "host"
-      source = "influxdb-data"
+    volume "influxdb_data" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "influxdb_data"
     }
 
     service {
@@ -45,12 +51,12 @@ job "influxdb" {
       }
 
       volume_mount {
-        volume      = "influxdb-data"
+        volume      = "influxdb_data"
         destination = "/var/lib/influxdb2"
       }
 
       volume_mount {
-        volume      = "influxdb-config"
+        volume      = "influxdb_config"
         destination = "/etc/influxdb2"
       }
 

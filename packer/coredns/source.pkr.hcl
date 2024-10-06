@@ -24,8 +24,9 @@ source "proxmox-iso" "coredns" {
   cloud_init_storage_pool = var.storage_pool
 
   network_adapters {
-    bridge   = var.bridge
-    model    = "virtio"
+    bridge = var.bridge
+    model  = "virtio"
+    tag    = var.vlan_tag
   }
 
   disks {

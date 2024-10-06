@@ -29,6 +29,7 @@ resource "proxmox_vm_qemu" "nomad-client" {
   network {
     model  = "virtio"
     bridge = var.bridge
+    tag    = var.vlan_tag        
   }
 
   disks {
@@ -55,15 +56,4 @@ resource "proxmox_vm_qemu" "nomad-client" {
   lifecycle {
     ignore_changes = all
   }
-
-  # provisioner "remote-exec" {
-  #   inline = [ "sudo reboot now" ]
-
-  #   connection {
-  #     type     = "ssh"
-  #     user     = var.ciuser
-  #     password = var.cipassword
-  #     host     = self.default_ipv4_address
-  #   }
-  # } 
 }

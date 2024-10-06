@@ -35,6 +35,11 @@ variable "bridge" {
   description = "The network bridge assigned to the vm guest"
 }
 
+variable "vlan_tag" {
+  type        = string
+  description = "The vlan assigned to the vm guest" 
+}
+
 variable "ssh_username" {
   type       = string
   sensitive  = true

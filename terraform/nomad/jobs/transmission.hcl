@@ -8,14 +8,21 @@ job "transmission" {
       port "http" { static = 9091 }
     }
 
-    volume transmission {
-      type   = "host"
-      source = "transmission"
+    volume "transmission" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "transmission"
     }
 
-    volume media {
-      type   = "host"
-      source = "media"
+
+    volume "media" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+      read_only       = false
+      source          = "media"
     }
 
     service {

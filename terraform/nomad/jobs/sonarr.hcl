@@ -8,14 +8,20 @@ job "sonarr" {
       port "http" { static = "8989" }
     }
 
-    volume sonarr {
-      type   = "host"
-      source = "sonarr"
+    volume "sonarr" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "sonarr"
     }
 
-    volume media {
-      type   = "host"
-      source = "media"
+    volume "media" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+      read_only       = false
+      source          = "media"
     }
 
     service {

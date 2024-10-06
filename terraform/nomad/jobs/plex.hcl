@@ -9,13 +9,19 @@ job "plex" {
     }
 
     volume "plex" {
-      type   = "host"
-      source = "plex"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "plex"
     }
 
     volume "media" {
-      type   = "host"
-      source = "media"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+      read_only       = false
+      source          = "media"
     }
 
     service {
@@ -45,6 +51,7 @@ job "plex" {
       volume_mount {
         volume      = "plex"
         destination = "/config"
+        read_only   = false
       }
 
       volume_mount {
@@ -55,7 +62,7 @@ job "plex" {
       env {
         PLEX_UID   = "1010"
         PLEX_GID   = "1010"
-        PLEX_CLAIM = "claim-XF5QPGHuQUV5j-nT-zcM"
+        PLEX_CLAIM = "claim-1kbMcezLyfAQEDfz9idS"
       }
 
       resources {

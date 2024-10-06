@@ -9,8 +9,11 @@ job "jellyfin" {
     }
 
     volume "jellyfin" {
-      type   = "host"
-      source = "jellyfin"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "jellyfin"
     }
 
     volume "media" {

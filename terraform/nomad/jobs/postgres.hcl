@@ -8,9 +8,12 @@ job "postgres" {
       port "postgres" { to = "5432" }
     }
 
-    volume postgres {
-      type   = "host"
-      source = "postgres"
+    volume "postgres" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "postgres"
     }
 
     service {
@@ -36,7 +39,7 @@ job "postgres" {
 
       volume_mount {
         volume      = "postgres"
-        destination = "/var/lib/pgsql/data"
+        destination = "/var/lib/pgsql/db"
       }
 
       config {

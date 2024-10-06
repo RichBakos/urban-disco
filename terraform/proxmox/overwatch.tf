@@ -1,16 +1,14 @@
-# resource "proxmox_vm_qemu" "mongo" {
+# resource "proxmox_vm_qemu" "overwatch" {
 
-#   depends_on = [resource.proxmox_vm_qemu.graylog]
-
-#   name        = "mongo01"
-#   target_node = var.proxmox_nodes[1]
-#   clone       = "cluster-services"
+#   name        = "overwatch"
+#   target_node = "pve01"
+#   clone       = "overwatch-server"
 #   full_clone  = true
 
 #   cores     = 2
 #   sockets   = 1
 #   cpu       = "host"
-#   memory    = 2048
+#   memory    = 4096
 #   scsihw    = "virtio-scsi-single"
 #   bootdisk  = "scsi0"
 #   bios      = "seabios"
@@ -24,12 +22,11 @@
 #   sshkeys    = var.proxmox_sshkeys
 #   ipconfig0  = "ip=dhcp"
 
+
 #   network {
 #     model  = "virtio"
-#     bridge = var.bridge
+#     bridge = var.bridge    
 #     tag    = var.vlan_tag    
-
-
 #   }
 
 #   disks {
@@ -56,4 +53,15 @@
 #   lifecycle {
 #     ignore_changes = all
 #   }
+
+#   provisioner "remote-exec" {
+#     inline = [ "sudo reboot now" ]
+
+#     connection {
+#       type     = "ssh"
+#       user     = var.ciuser
+#       password = var.cipassword
+#       host     = self.default_ipv4_address
+#     }
+#   }  
 # }

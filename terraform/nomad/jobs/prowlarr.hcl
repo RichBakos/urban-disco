@@ -8,14 +8,20 @@ job "prowlarr" {
       port "http" { static = "9696" }
     }
 
-    volume prowlarr {
-      type   = "host"
-      source = "prowlarr"
+    volume "prowlarr" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "prowlarr"
     }
 
-    volume media {
-      type   = "host"
-      source = "media"
+    volume "media" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+      read_only       = false
+      source          = "media"
     }
 
     service {

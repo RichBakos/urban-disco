@@ -1,26 +1,28 @@
-job "bitwarden" {
+job "vaultwarden" {
   datacenters = ["dc1"]
   type        = "service"
 
-  group "bitwarden" {
+  group "vaultwarden" {
 
     network {
       port "http" { to = 8089 }
     }
 
-    volume "bitwarden" {
-      type      = "host"
-      source    = "bitwarden"
-      read_only = false
+    volume "vaultwarden" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "vaultwarden"
     }
 
     service {
-      name = "bitwarden"
+      name = "vaultwarden"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.bitwarden.entrypoints=websecure",
-        "traefik.http.routers.bitwarden.middlewares=auth"
+        "traefik.http.routers.vaultwarden.entrypoints=websecure",
+        "traefik.http.routers.vaultwarden.middlewares=auth"
       ]
 
       check {
@@ -31,7 +33,7 @@ job "bitwarden" {
       }
     }
 
-    task "bitwarden" {
+    task "vaultwarden" {
       driver = "docker"
 
       env {
@@ -45,7 +47,7 @@ job "bitwarden" {
       }
 
       volume_mount {
-        volume      = "bitwarden"
+        volume      = "vaultwarden"
         destination = "/data"
       }
 

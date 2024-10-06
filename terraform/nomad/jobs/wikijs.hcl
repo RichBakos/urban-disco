@@ -9,8 +9,11 @@ job "wikijs" {
     }
 
     volume "wikijs" {
-      type   = "host"
-      source = "wikijs"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "wikijs"
     }
 
     service {

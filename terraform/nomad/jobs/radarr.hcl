@@ -9,13 +9,19 @@ job "radarr" {
     }
 
     volume "radarr" {
-      type   = "host"
-      source = "radarr"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "radarr"
     }
 
     volume "media" {
-      type   = "host"
-      source = "media"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "multi-node-multi-writer"
+      read_only       = false
+      source          = "media"
     }
 
     service {

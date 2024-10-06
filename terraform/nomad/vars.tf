@@ -1,3 +1,15 @@
+###--- Ceph vars ---###
+
+variable "ceph_userid" {
+  type        = string
+  description = "The ceph auth client required for cephx"
+}
+
+variable "ceph_userkey" {
+  type        = string
+  description = "The ceph auth client key required for cephx"
+}
+
 ###--- Auth vars ---###
 
 variable "auth_domain" {

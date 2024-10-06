@@ -11,8 +11,11 @@ job "grafana" {
     }
 
     volume "grafana" {
-      type   = "host"
-      source = "grafana"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "grafana"
     }
 
     service {

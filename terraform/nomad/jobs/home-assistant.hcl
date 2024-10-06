@@ -9,8 +9,11 @@ job "home-assistant" {
     }
 
     volume "hass" {
-      type   = "host"
-      source = "hass"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "hass"
     }
 
     service {

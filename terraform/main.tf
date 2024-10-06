@@ -13,6 +13,7 @@ module "proxmox" {
   proxmox_service_node = var.proxmox_service_node
   storage_pool         = var.storage_pool
   bridge               = var.bridge
+  vlan_tag             = var.vlan_tag
 }
 
 module "consul" {
@@ -24,6 +25,9 @@ module "nomad" {
   source     = "./nomad"
   depends_on = [module.consul.configured]
 
+  # Ceph
+  ceph_userid  = var.ceph_userid
+  ceph_userkey = var.ceph_userkey
   # Traefik forward auth
   auth_domain          = var.auth_domain
   auth_client_id       = var.auth_client_id

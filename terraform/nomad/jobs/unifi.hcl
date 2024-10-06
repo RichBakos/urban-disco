@@ -13,9 +13,12 @@ job "unifi" {
       port "http" { static = "8443" }
     }
 
-    volume unifi {
-      type   = "host"
-      source = "unifi"
+    volume "unifi" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "unifi"
     }
 
     service {

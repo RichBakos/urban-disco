@@ -17,8 +17,11 @@ job "mongo" {
     }
 
     volume "mongo" {
-      type   = "host"
-      source = "mongo"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "mongo"
     }
 
     service {

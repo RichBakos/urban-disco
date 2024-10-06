@@ -3,9 +3,18 @@ job "prometheus" {
   type        = "service"
 
   group "prometheus" {
+
     network {
       port "http" { static = "9090" }
     }
+
+    volume "prometheus" {
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "prometheus"
+    }    
 
     service {
       name = "prometheus"
@@ -35,6 +44,11 @@ job "prometheus" {
           "/mnt/volumes/prometheus:/opt/prometheus",
           "local/prometheus.yml:/etc/prometheus/prometheus.yml",
         ]
+      }
+
+      volume_mount {
+        volume      = "postgres"
+        destination = "/opt/prometheus"
       }
 
       template {

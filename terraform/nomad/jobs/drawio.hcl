@@ -3,6 +3,7 @@ job "drawio" {
   type        = "service"
 
   group "drawio" {
+    
     network {
       port "http" { to = 8080 }
     }

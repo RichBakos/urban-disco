@@ -9,8 +9,11 @@ job "flaresolverr" {
     }
 
     volume "flaresolverr" {
-      type   = "host"
-      source = "flaresolverr"
+      type            = "csi"
+      attachment_mode = "file-system"
+      access_mode     = "single-node-writer"
+      read_only       = false
+      source          = "flaresolverr"
     }
 
     volume "media" {

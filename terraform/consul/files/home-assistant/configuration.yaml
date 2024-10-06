@@ -1,0 +1,72 @@
+homeassistant:
+  # Customization files
+  customize: !include customize.yaml
+  customize_domain:
+    automation:
+      initial_state: on
+
+frontend:
+config:
+system_health:
+sun:
+dhcp:
+zeroconf:
+logbook:
+stream:
+history:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 192.168.2.0/24
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+
+tts:
+  - platform: google_translate
+
+amcrest:
+  - host: !secret amcrest_host
+    username: !secret amcrest_username
+    password: !secret amcrest_password
+    name: Front Door
+    binary_sensors:
+      motion_detected
+    stream_source: mjpeg
+
+google_assistant:
+  project_id: !secret google_project_id
+  service_account: !include service_account.json
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+    - fan
+    - climate
+    - camera
+  entity_config:
+    media_player.home_theater:
+      expose: true
+      room: Family Room
+    media_player.sony_bravia_tv:
+      expose: true
+      room: Family Room
+    switch.pergola_lights:
+      expose: true
+      room: Outside
+    switch.garage_door:
+      expose: false
+    switch.family_room_fan_switch:
+      expose: false
+    switch.bedroom_fan_switch:
+      expose: false
+    switch.living_room_fan_switch:
+      expose: false
+
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+cover: !include covers.yaml
+automation: !include automations.yaml
+light: !include lights.yaml

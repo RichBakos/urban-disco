@@ -44,3 +44,8 @@ variable "bridge" {
   type        = string
   description = "The network bridge used by the virtual machines"
 }
+
+variable "vlan_tag" {
+  type        = string
+  description = "The vlan used by the virtual machines"
+}

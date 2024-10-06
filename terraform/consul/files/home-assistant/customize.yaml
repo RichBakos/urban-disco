@@ -1,0 +1,8 @@
+fan.bedroom_fan:
+  assumed_state: false
+fan.living_room_fan:
+  assumed_state: false
+light.living_room_fan:
+  assumed_state: false
+cover.garage_door:
+  device_class: garage

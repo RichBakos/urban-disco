@@ -44,6 +44,23 @@ variable "bridge" {
   description = "The network bridge used by the virtual machines"
 }
 
+variable "vlan_tag" {
+  type        = string
+  description = "The vlan used by the virtual machines"
+}
+
+###--- Ceph vars ---###
+
+variable "ceph_userid" {
+  type        = string
+  description = "The ceph auth client required for cephx"
+}
+
+variable "ceph_userkey" {
+  type        = string
+  description = "The ceph auth client key required for cephx"
+}
+
 ### ForwardAuth
 variable "auth_domain" {
   type        = string

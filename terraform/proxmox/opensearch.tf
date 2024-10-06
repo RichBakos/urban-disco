@@ -28,6 +28,7 @@
 #   network {
 #     model  = "virtio"
 #     bridge = var.bridge
+#     tag    = var.vlan_tag    
 
 #   }
 
