@@ -12,6 +12,6 @@ A full list of workloads [here](terraform/nomad/jobs/).
 
 ## Storage
 
-Update: As of 10/6/2024 I have migrated away from Gluster and I'm not using Ceph as my backing store.
+Update: As of 10/6/2024 I have migrated away from Gluster and I'm now using Ceph as my backing store.
 
 My lab currently takes advantage of Nomad host volumes. I like the additional safeguard provided through volume awareness.  The host volumes are made available via Gluster which is in turn backed by ZFS. This setup isn't as flexible as docker volumes or a CSI plugin. It's simple. It's fast. It's reliable. It's quick to refactor if I move to CSI plugins for storage. I'll evaluate my CSI plugin options if/when I migrate to [Ceph](https://ceph.io)
